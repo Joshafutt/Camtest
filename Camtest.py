@@ -1,37 +1,14 @@
 import cv2
 
+# video capture source camera (Here webcam of laptop)
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()  # return a single frame in variable `frame`
 
-def Camera():
-    #key = cv2. waitKey(1)
-    webcam = cv2.VideoCapture(0)
-    # while True:
-    # try:
-    check, frame = webcam.read()
-    print("gets here")
-    #   cv2.imshow("Capturing", frame)
-    #key = cv2.waitKey(1)
-    # if key == ord('s'):
-    cv2.imwrite(filename='saved_img.jpg', img=frame)
-    webcam.release()
-    img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
-    img_new = cv2.imshow("Captured Image", img_new)
-    cv2.waitKey(1650)
-    cv2.destroyAllWindows()
-    img_ = cv2.imread('saved_img.jpg', cv2.IMREAD_ANYCOLOR)
-    gray = cv2.cvtColor(img_, cv2.COLOR_BGR2GRAY)
-    img_ = cv2.resize(gray, (28, 28))
-    img_resized = cv2.imwrite(
-        filename='saved_img-final.jpg', img=img_)
-    # break
-    #     elif key == ord('q'):
-    #         webcam.release()
-    #         cv2.destroyAllWindows()
-    #         exit()
-    # except(KeyboardInterrupt):
-    #     webcam.release()
-    #     cv2.destroyAllWindows()
-    #     break
+while(True):
+    cv2.imshow('img1', frame)  # display the captured image
+    if cv2.waitKey(1) & 0xFF == ord('y'):  # save on pressing 'y'
+        cv2.imwrite('images/c1.png', frame)
+        cv2.destroyAllWindows()
+        break
 
-
-if __name__ == "__main__":
-    Camera()
+cap.release()
